@@ -4,9 +4,8 @@
 #include <Wire.h>
 #include "Adafruit_TCS34725.h"
 
-//////////////////////////////////////////////////
+
 // WiFi
-//////////////////////////////////////////////////
 
 // const char* ssid = "TP-Link_3BE4";
 // const char* password = "ninomiya317";
@@ -21,23 +20,19 @@ const int port = 8000;
 
 WiFiUDP Udp;
 
-//////////////////////////////////////////////////
-// カラーセンサ
-//////////////////////////////////////////////////
 
+// カラーセンサ
 Adafruit_TCS34725 tcs =
 Adafruit_TCS34725(
   TCS34725_INTEGRATIONTIME_50MS,
   TCS34725_GAIN_4X
 );
 
-//////////////////////////////////////////////////
 
 float smoothR = 0;
 float smoothG = 0;
 float smoothB = 0;
 
-//////////////////////////////////////////////////
 
 void setup() {
 
@@ -70,7 +65,6 @@ void setup() {
   M5.Lcd.println(WiFi.localIP());
 }
 
-//////////////////////////////////////////////////
 
 void loop() {
 
@@ -102,10 +96,9 @@ void loop() {
   int finalG = smoothG;
   int finalB = smoothB;
 
-  //////////////////////////////////////////////////
-  // 送信
-  //////////////////////////////////////////////////
 
+
+  // 送信
   byte data[3] = {
     finalR,
     finalG,
@@ -118,7 +111,6 @@ void loop() {
 
   Udp.endPacket();
 
-  //////////////////////////////////////////////////
 
   M5.Lcd.fillRect(0,40,240,80,BLACK);
 

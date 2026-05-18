@@ -11,7 +11,9 @@ const char* ssid = "MI6-WLAN";
 const char* password = "MI028WLAN";
 
 // ESP32 IP
-const char* espHost = "172.27.56.15";
+const char* espHost1 = "172.27.56.17";
+const char* espHost2 = "172.27.56.22";
+const char* espHost3 = "172.27.56.23";
 
 const int port = 8000;
 
@@ -129,11 +131,17 @@ void loop() {
     mode
   };
 
-  Udp.beginPacket(espHost, port);
+ Udp.beginPacket(espHost1, port);
+ Udp.write(sendData, 4);
+ Udp.endPacket();
 
-  Udp.write(sendData, 4);
+ Udp.beginPacket(espHost2, port);
+ Udp.write(sendData, 4);
+ Udp.endPacket();
 
-  Udp.endPacket();
+ Udp.beginPacket(espHost3, port);
+ Udp.write(sendData, 4);
+ Udp.endPacket();
   
 
   M5.Lcd.fillRect(0,40,240,100,BLACK);
